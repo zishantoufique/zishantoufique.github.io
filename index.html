@@ -1,0 +1,219 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Portfolio of Zishan Toufique — computer science student and builder." />
+    <title>Zishan Toufique — Portfolio</title>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=Playfair+Display:ital,wght@0,600;0,700;1,600;1,700&display=swap');
+
+      :root { --bg:#090a0c; --panel:#121317; --line:rgba(255,255,255,.1); --text:#f2f2f0; --muted:#9b9ca2; --soft:#dadbd7; --accent:#c5f7d7; }
+      * { box-sizing:border-box; }
+      html { scroll-behavior:smooth; }
+      body { margin:0; background:var(--bg); color:var(--text); font-family:'DM Sans',Arial,sans-serif; overflow-x:hidden; }
+      body::before { content:''; position:fixed; inset:0; pointer-events:none; opacity:.22; background-image:radial-gradient(rgba(255,255,255,.35) .45px,transparent .55px); background-size:5px 5px; mask-image:linear-gradient(to bottom,black,transparent 72%); }
+      a { color:inherit; text-decoration:none; }
+      .shell { width:min(1180px,calc(100% - 48px)); margin:auto; }
+      .eyebrow { font:500 10px/1 'DM Mono',monospace; letter-spacing:.14em; color:var(--muted); text-transform:uppercase; display:flex; align-items:center; gap:9px; }
+      .eyebrow::before { content:''; width:6px; height:6px; border-radius:50%; background:var(--accent); box-shadow:0 0 12px var(--accent); }
+      h1,h2,h3,p { margin:0; }
+      h2 { font-size:clamp(39px,5vw,67px); letter-spacing:-.075em; line-height:.95; max-width:650px; }
+      h2 .serif { font-family:'Playfair Display',Georgia,serif; font-style:italic; letter-spacing:-.08em; }
+
+      .nav { position:sticky; z-index:20; top:14px; width:min(1180px,calc(100% - 32px)); height:56px; margin:14px auto 0; border:1px solid var(--line); background:rgba(15,16,19,.88); backdrop-filter:blur(16px); border-radius:12px; display:flex; align-items:center; padding:0 12px 0 17px; }
+      .brand { font-size:18px; font-weight:700; letter-spacing:-.09em; }
+      .nav-links { display:flex; gap:19px; align-items:center; margin-left:auto; font-size:11px; color:#a8a9ad; }
+      .nav-links a:hover { color:white; }
+      .connect { background:#ecece8; color:#17181a; border-radius:8px; padding:11px 15px; margin-left:19px; font-size:11px; font-weight:700; }
+
+      .hero { min-height:680px; display:grid; align-items:center; grid-template-columns:1.04fr .96fr; gap:72px; padding:88px 0 80px; }
+      .hero h1 { margin-top:19px; font-size:clamp(70px,10.3vw,140px); line-height:.72; letter-spacing:-.105em; }
+      .hero h1 span { display:block; padding-left:.15em; font:italic 600 .75em/.86 'Playfair Display',Georgia,serif; letter-spacing:-.09em; }
+      .degree { margin-top:25px; font-size:14px; line-height:1.55; color:#cccdcb; }
+      .degree strong { display:block; color:#f1f2ee; }
+      .intro { max-width:490px; margin-top:27px; color:var(--muted); font-size:15px; line-height:1.6; }
+      .actions { display:flex; flex-wrap:wrap; gap:10px; margin-top:27px; }
+      .button { border:1px solid var(--line); background:#15161a; border-radius:8px; padding:13px 16px; font-size:12px; font-weight:700; transition:.2s; }
+      .button.primary { background:#e9eae6; color:#15161a; border-color:#e9eae6; }
+      .button:hover { transform:translateY(-2px); border-color:rgba(255,255,255,.32); }
+      .socials { display:flex; gap:9px; margin-top:21px; }
+      .socials a { border:1px solid var(--line); width:32px; height:32px; display:grid; place-items:center; border-radius:50%; color:#bfc1be; font-size:12px; }
+      .portrait-frame { position:relative; width:min(100%,420px); aspect-ratio:.82; margin-left:auto; padding:10px; border-radius:50% 50% 16% 16% / 32% 32% 6% 6%; background:linear-gradient(145deg,#30343a,#0f1013 50%,#292d31); box-shadow:0 30px 60px rgba(0,0,0,.32); }
+      .portrait { height:100%; border-radius:50% 50% 14% 14% / 32% 32% 5% 5%; overflow:hidden; position:relative; background:#26282c; }
+      .portrait img { width:100%; height:100%; display:block; object-fit:cover; object-position:50% 31%; filter:saturate(.87) contrast(1.03); }
+      .tag { position:absolute; left:-20px; bottom:25px; padding:11px 13px; border:1px solid var(--line); background:rgba(13,14,17,.88); border-radius:8px; font:10px/1.35 'DM Mono',monospace; color:#d7d8d5; }
+      .tag b { color:var(--muted); margin-right:12px; }
+
+      section { padding:128px 0; }
+      .about-grid { display:grid; grid-template-columns:1.02fr .98fr; gap:90px; align-items:center; }
+      .about-copy { margin-top:25px; max-width:570px; font-size:18px; letter-spacing:-.025em; line-height:1.52; color:#e2e3df; }
+      .about-copy + p { margin-top:17px; max-width:560px; color:var(--muted); font-size:14px; line-height:1.65; }
+      .education-card { padding:25px 27px; border:1px solid var(--line); border-radius:12px; background:linear-gradient(135deg,rgba(28,29,34,.9),rgba(15,16,18,.9)); box-shadow:0 20px 60px rgba(0,0,0,.2); }
+      .edu-row { display:grid; grid-template-columns:120px 1fr; padding:14px 0; border-bottom:1px solid var(--line); font-size:13px; gap:12px; }
+      .edu-row:last-child { border:0; }
+      .edu-row span { font:10px 'DM Mono',monospace; color:var(--muted); }
+      .edu-row b { font-weight:500; line-height:1.4; }
+
+      .section-head { margin-bottom:42px; }
+      .section-head p { margin-top:15px; color:var(--muted); font-size:14px; }
+      .capabilities { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; }
+      .skill-card { min-height:144px; padding:20px; border:1px solid var(--line); border-radius:11px; background:linear-gradient(135deg,rgba(27,29,34,.86),rgba(15,16,18,.9)); position:relative; }
+      .skill-card.wide { grid-column:span 2; }
+      .number { position:absolute; top:20px; right:20px; font:10px 'DM Mono',monospace; color:#666a70; }
+      .skill-card h3 { font-size:14px; margin-bottom:19px; }
+      .pills { display:flex; flex-wrap:wrap; gap:7px; }
+      .pill { border:1px solid rgba(255,255,255,.12); border-radius:999px; padding:6px 8px; font-size:10px; color:#c7c8c5; background:rgba(255,255,255,.025); }
+
+      .project-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; }
+      .project { min-height:475px; padding:24px; border:1px solid var(--line); border-radius:12px; display:flex; flex-direction:column; background:linear-gradient(135deg,#17191e,#111216 63%,#101113); }
+      .project:nth-child(2) { background:radial-gradient(circle at 80% 20%,rgba(113,164,138,.13),transparent 38%),linear-gradient(135deg,#161a1f,#111216 63%,#101113); }
+      .status { width:max-content; padding:6px 9px; border-radius:999px; background:rgba(193,248,216,.1); border:1px solid rgba(193,248,216,.15); color:#c0e7ce; font:10px 'DM Mono',monospace; }
+      .project-label { margin-top:21px; font:10px 'DM Mono',monospace; color:var(--muted); letter-spacing:.09em; }
+      .project h3 { margin-top:8px; max-width:410px; font-size:clamp(24px,2.2vw,30px); line-height:1.02; letter-spacing:-.065em; }
+      .project > p { margin-top:17px; color:#b2b4b7; font-size:13px; line-height:1.58; max-width:480px; }
+      .project ul { margin:17px 0 22px; padding-left:18px; color:#d1d2cf; font-size:12px; line-height:1.8; }
+      .project-bottom { margin-top:auto; padding-top:17px; border-top:1px solid var(--line); }
+      .project-bottom .pills { margin-bottom:13px; }
+      .project-link { display:block; border:1px solid rgba(255,255,255,.15); border-radius:7px; padding:10px; text-align:center; font-size:11px; font-weight:700; color:#e1e2df; }
+
+      .training-list { border-top:1px solid var(--line); }
+      .training { display:grid; grid-template-columns:72px 1fr; gap:5px; padding:29px 0; border-bottom:1px solid var(--line); }
+      .training > span { font:11px 'DM Mono',monospace; color:#85878c; }
+      .training h3 { font-size:16px; font-weight:600; letter-spacing:-.03em; }
+      .training h3 small { color:#9fa1a4; font-weight:400; }
+      .training time { display:block; margin:7px 0 12px; color:#93959b; font-size:11px; }
+      .training ul { margin:0; padding-left:17px; color:#c2c4c3; font-size:12px; line-height:1.8; }
+      .training a { display:inline-block; margin-top:13px; font-size:12px; font-weight:600; border-bottom:1px solid #767a78; }
+
+      .certificate-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:13px; }
+      .certificate { overflow:hidden; border:1px solid var(--line); border-radius:11px; background:linear-gradient(135deg,#181a1f,#101114); transition:transform .2s,border-color .2s; }
+      .certificate:hover { transform:translateY(-4px); border-color:rgba(255,255,255,.26); }
+      .certificate img { display:block; width:100%; height:190px; object-fit:cover; background:#f3f3f0; }
+      .certificate-body { padding:16px 17px 17px; }
+      .certificate-body small { display:block; color:#989ba0; font:10px 'DM Mono',monospace; letter-spacing:.05em; }
+      .certificate-body h3 { margin-top:7px; min-height:35px; font-size:15px; line-height:1.18; letter-spacing:-.035em; }
+      .certificate-body p { margin-top:7px; color:#a8aaad; font-size:11px; }
+      .certificate-body a { display:inline-block; margin-top:14px; border-bottom:1px solid #767a78; font-size:11px; font-weight:600; }
+
+      .milestones { display:grid; grid-template-columns:repeat(4,1fr); gap:12px; }
+      .milestone { min-height:150px; padding:20px; border-radius:11px; border:1px solid var(--line); background:linear-gradient(135deg,#181a1f,#101114); }
+      .milestone .icon { color:#c5f7d7; font-size:17px; }
+      .milestone b { display:block; margin-top:28px; font-size:21px; letter-spacing:-.06em; }
+      .milestone span { display:block; margin-top:5px; color:var(--muted); font-size:11px; line-height:1.45; }
+      .academic { margin-top:128px; }
+      .timeline { position:relative; margin-top:42px; padding-left:29px; }
+      .timeline::before { content:''; position:absolute; left:5px; top:7px; bottom:15px; width:1px; background:var(--line); }
+      .timeline-item { position:relative; padding:0 0 42px; }
+      .timeline-item:last-child { padding-bottom:0; }
+      .timeline-item::before { content:''; position:absolute; left:-29px; top:5px; width:9px; height:9px; border-radius:50%; border:2px solid #777b80; background:var(--bg); }
+      .timeline-item:first-child::before { background:var(--accent); border-color:var(--accent); box-shadow:0 0 12px rgba(197,247,215,.65); }
+      .timeline-item time { display:block; margin-bottom:10px; color:#a3a5a8; font:10px 'DM Mono',monospace; letter-spacing:.08em; }
+      .timeline-item h3 { font-size:20px; letter-spacing:-.045em; }
+      .timeline-item p { margin-top:5px; color:var(--muted); font-size:12px; }
+      .timeline-item strong { display:block; margin-top:18px; color:#e2e3e0; font-size:14px; line-height:1.5; }
+      .timeline-item em { display:block; margin-top:9px; color:#c8cac7; font-size:13px; font-style:normal; }
+
+      .contact { padding-bottom:70px; display:grid; grid-template-columns:.8fr 1.2fr; gap:110px; align-items:end; }
+      .contact h2 { font-size:clamp(52px,6vw,82px); }
+      .contact p { margin-top:22px; max-width:350px; color:var(--muted); line-height:1.55; font-size:14px; }
+      .contact-links { border-top:1px solid var(--line); }
+      .contact-links a { display:flex; align-items:center; justify-content:space-between; padding:19px 0; border-bottom:1px solid var(--line); }
+      .contact-info { display:flex; align-items:center; gap:12px; }
+      .contact-icon { width:29px; height:29px; display:grid; place-items:center; border:1px solid var(--line); border-radius:50%; color:#cfd1cd; }
+      .contact-icon svg,.socials svg { width:14px; height:14px; }
+      .contact-icon svg.line { fill:none; stroke:currentColor; stroke-width:1.65; stroke-linecap:round; stroke-linejoin:round; }
+      .contact-icon svg.solid,.socials svg { fill:currentColor; }
+      .contact-links small { display:block; margin-bottom:5px; color:var(--muted); font:10px 'DM Mono',monospace; letter-spacing:.1em; }
+      .contact-links span { font-size:14px; }
+      .contact-links b { color:#a3a5a7; }
+      footer { border-top:1px solid var(--line); padding:28px 0; color:#808288; font-size:11px; }
+      footer .shell { display:flex; justify-content:space-between; gap:20px; }
+
+      @media (max-width:780px) {
+        .shell { width:min(100% - 32px,600px); }
+        .nav { width:calc(100% - 24px); height:50px; top:8px; margin-top:8px; }
+        .nav-links { display:none; }.connect { margin-left:auto; padding:9px 11px; }
+        .hero { grid-template-columns:1fr; padding:72px 0 50px; gap:52px; }.hero h1 { font-size:clamp(72px,22vw,120px); }.portrait-frame { margin:auto; width:min(88%,390px); }.tag { left:-8px; }
+        section { padding:78px 0; }.about-grid,.contact { grid-template-columns:1fr; gap:42px; }.capabilities,.milestones,.certificate-grid { grid-template-columns:1fr 1fr; }.skill-card.wide { grid-column:span 2; }.project-grid { grid-template-columns:1fr; }.contact { padding-bottom:52px; }.edu-row { grid-template-columns:100px 1fr; }
+      }
+      @media (max-width:440px) { .capabilities,.milestones,.certificate-grid { grid-template-columns:1fr; }.skill-card.wide { grid-column:span 1; }.training { grid-template-columns:42px 1fr; }.portrait-frame { width:96%; }.project { min-height:390px; } }
+    </style>
+  </head>
+  <body>
+    <nav class="nav" aria-label="Main navigation">
+      <a class="brand" href="#home">ZT.</a>
+      <div class="nav-links"><a href="#about">About</a><a href="#skills">Skills</a><a href="#projects">Projects</a><a href="#training">Training</a><a href="#certificates">Certificates</a><a href="#education">Education</a></div>
+      <a class="connect" href="#contact">Let's Connect ↗</a>
+    </nav>
+
+    <main>
+      <section class="hero shell" id="home">
+        <div>
+          <p class="eyebrow">Technology &amp; Engineering</p>
+          <h1>Zishan<span>Toufique.</span></h1>
+          <p class="degree">B.Tech. (Hons.) — CSE<strong>Technology enthusiast &amp; problem solver</strong></p>
+          <p class="intro">A computer science student focused on building thoughtful, practical technology—from secure software tools to intelligent systems with real-world impact.</p>
+          <div class="actions"><a class="button primary" href="#projects">View Projects ↗</a><a class="button" href="https://drive.google.com/file/d/1pPYgGD4BhywKkeV-Civ9BFRqVVqDxGBK/view?usp=sharing" target="_blank" rel="noreferrer">View Resume <span aria-hidden="true">⇩</span></a></div>
+          <div class="socials" aria-label="Social links"><a href="mailto:zishantoufique@gmail.com" aria-label="Email">✉</a><a href="https://www.linkedin.com/in/zishantoufique/" target="_blank" rel="noreferrer" aria-label="LinkedIn">in</a><a href="https://github.com/zishantoufique" target="_blank" rel="noreferrer" aria-label="GitHub"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0a8 8 0 0 0-2.53 15.59c.4.08.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.13 0 0 .67-.21 2.2.82A7.65 7.65 0 0 1 8 4.86c.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.11.16 1.93.08 2.13.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8 8 0 0 0 8 0Z"/></svg></a></div>
+        </div>
+        <div class="portrait-frame" aria-label="Portrait of Zishan Toufique"><div class="portrait"><img src="assets/zishan-toufique-profile.jpg" alt="Zishan Toufique" /></div><div class="tag"><b>01</b> Student portfolio<br>&nbsp;&nbsp;&nbsp;&nbsp;Punjab, India</div></div>
+      </section>
+
+      <section class="shell" id="about">
+        <div class="about-grid">
+          <div><p class="eyebrow">About me</p><h2 style="margin-top:18px">Learning by <span class="serif">building.</span></h2><p class="about-copy">I’m Zishan Toufique, a B.Tech. (Hons.) Computer Science student with a strong academic foundation and a curiosity for how technology can solve everyday problems.</p><p>I enjoy turning ideas into working systems, exploring secure application design, and combining software with hardware to create solutions that are clear, useful, and reliable.</p></div>
+          <article class="education-card" aria-label="Education summary"><div class="edu-row"><span>EDUCATION</span><b>B.Tech. (Hons.) — CSE</b></div><div class="edu-row"><span>UNIVERSITY</span><b>Lovely Professional University</b></div><div class="edu-row"><span>CURRENT CGPA</span><b>9.78</b></div><div class="edu-row"><span>LOCATION</span><b>India</b></div></article>
+        </div>
+      </section>
+
+      <section class="shell" id="skills">
+        <div class="section-head"><p class="eyebrow">Capabilities</p><h2 style="margin-top:18px">An evolving technical <span class="serif">foundation.</span></h2><p>Focused on building secure, functional systems alongside core engineering fundamentals.</p></div>
+        <div class="capabilities">
+          <article class="skill-card"><span class="number">01</span><h3>Languages</h3><div class="pills"><span class="pill">C++</span><span class="pill">Python</span><span class="pill">Java</span><span class="pill">JavaScript</span></div></article>
+          <article class="skill-card"><span class="number">02</span><h3>Web &amp; Software</h3><div class="pills"><span class="pill">HTML</span><span class="pill">CSS</span><span class="pill">SQL</span><span class="pill">Git</span></div></article>
+          <article class="skill-card"><span class="number">03</span><h3>Core Concepts</h3><div class="pills"><span class="pill">OOP</span><span class="pill">DSA</span><span class="pill">DBMS</span><span class="pill">OS</span></div></article>
+          <article class="skill-card wide"><span class="number">04</span><h3>Engineering Interests</h3><div class="pills"><span class="pill">Cybersecurity</span><span class="pill">IoT</span><span class="pill">Sensors</span><span class="pill">System Design</span><span class="pill">Problem Solving</span></div></article>
+          <article class="skill-card"><span class="number">05</span><h3>Strengths</h3><div class="pills"><span class="pill">Curiosity</span><span class="pill">Teamwork</span><span class="pill">Communication</span></div></article>
+        </div>
+      </section>
+
+      <section class="shell" id="projects">
+        <div class="section-head"><p class="eyebrow">Selected work</p><h2 style="margin-top:18px">Projects with practical <span class="serif">impact.</span></h2></div>
+        <div class="project-grid">
+          <article class="project"><span class="status">Completed</span><p class="project-label">SECURE SOFTWARE TOOL</p><h3>Secure File Encryption &amp; Decryption Tool</h3><p>A desktop utility that encrypts sensitive files with password-based cryptography, then restores them only through a controlled decryption flow.</p><ul><li>AES-256-CBC encryption for private files</li><li>PBKDF2 key derivation with random salt and IV generation</li><li>Tkinter interface for secure, simple file handling</li></ul><div class="project-bottom"><div class="pills"><span class="pill">Python</span><span class="pill">AES-256</span><span class="pill">Tkinter</span></div><a class="project-link" href="https://github.com/zishantoufique/secure-file-encryption-tool" target="_blank" rel="noreferrer">View on GitHub ↗</a></div></article>
+          <article class="project"><span class="status">Prototype</span><p class="project-label">SMART INFRASTRUCTURE</p><h3>Smart Traffic Light System using Piezoelectric Plates and IR Sensors</h3><p>An adaptive traffic-management system that senses lane activity and uses piezoelectric energy harvesting to support responsive signal timing.</p><ul><li>IR sensors detect vehicle presence and traffic density</li><li>Piezoelectric plates capture energy from passing vehicles</li><li>Dynamic timing prioritizes congested lanes to reduce idle time</li></ul><div class="project-bottom"><div class="pills"><span class="pill">Arduino</span><span class="pill">IR Sensors</span><span class="pill">Piezoelectric</span></div><a class="project-link" href="https://github.com/zishantoufique/smart-traffic-light-arduino" target="_blank" rel="noreferrer">View on GitHub ↗</a></div></article>
+          <article class="project"><span class="status">Completed</span><p class="project-label">NETWORK SECURITY</p><h3>Network Vulnerability Scanner</h3><p>A Python-based assessment tool that maps local-network exposure by identifying active hosts, open ports, and services that may need closer security review.</p><ul><li>Combines Nmap with socket programming for host and port discovery</li><li>Organizes detected services into a clear scan workflow</li><li>Surfaces practical recommendations to reduce unnecessary exposure</li></ul><div class="project-bottom"><div class="pills"><span class="pill">Python</span><span class="pill">Nmap</span><span class="pill">Socket</span></div><a class="project-link" href="https://github.com/zishantoufique/network-vulnerability-scanner" target="_blank" rel="noreferrer">View on GitHub ↗</a></div></article>
+        </div>
+      </section>
+
+      <section class="shell" id="training">
+        <div class="section-head"><p class="eyebrow">Practical learning</p><h2 style="margin-top:18px">Training &amp; <span class="serif">simulations.</span></h2></div>
+        <div class="training-list">
+          <article class="training"><span>01</span><div><h3>Mastercard — Cybersecurity Virtual Experience Program <small>· Forage</small></h3><time>Completed</time><ul><li>Explored the role of security awareness in identifying and reporting phishing threats.</li><li>Reviewed ways to strengthen training and procedures across an organization.</li></ul></div></article>
+          <article class="training"><span>02</span><div><h3>Hands-On Cybersecurity Learning <small>· TryHackMe</small></h3><time>Ongoing</time><ul><li>Building practical familiarity with networking, Linux, web security, and vulnerability assessment.</li><li>Learning through guided labs, challenges, and security-focused problem solving.</li></ul><a href="#contact">View profile ↗</a></div></article>
+        </div>
+      </section>
+
+      <section class="shell" id="certificates">
+        <div class="section-head"><p class="eyebrow">Credentials</p><h2 style="margin-top:18px">Certificates &amp; learning <span class="serif">records.</span></h2></div>
+        <div class="certificate-grid">
+          <article class="certificate"><a href="assets/tryhackme-cyber-security-101.jpg" target="_blank"><img src="assets/tryhackme-cyber-security-101.jpg" alt="TryHackMe Cyber Security 101 certificate" /></a><div class="certificate-body"><small>TRYHACKME</small><h3>Cyber Security 101 Learning Path</h3><p>13 July 2026 · 45 hours 23 minutes</p><a href="assets/tryhackme-cyber-security-101.jpg" target="_blank">View Certificate ↗</a></div></article>
+          <article class="certificate"><a href="assets/cisco-networking-basics.jpg" target="_blank"><img src="assets/cisco-networking-basics.jpg" alt="Cisco Networking Academy Networking Basics certificate" /></a><div class="certificate-body"><small>CISCO NETWORKING ACADEMY</small><h3>Networking Basics</h3><p>24 January 2026</p><a href="assets/cisco-networking-basics.jpg" target="_blank">View Certificate ↗</a></div></article>
+          <article class="certificate"><a href="assets/saylor-python.jpg" target="_blank"><img src="assets/saylor-python.jpg" alt="Saylor Academy Introduction to Python certificate" /></a><div class="certificate-body"><small>SAYLOR ACADEMY</small><h3>CS105: Introduction to Python</h3><p>1 February 2026 · Score: 95%</p><a href="assets/saylor-python.jpg" target="_blank">View Certificate ↗</a></div></article>
+          <article class="certificate"><a href="assets/mastercard-cybersecurity.jpg" target="_blank"><img src="assets/mastercard-cybersecurity.jpg" alt="Mastercard Cybersecurity Job Simulation certificate" /></a><div class="certificate-body"><small>FORAGE × MASTERCARD</small><h3>Cybersecurity Job Simulation</h3><p>14 June 2026</p><a href="assets/mastercard-cybersecurity.jpg" target="_blank">View Certificate ↗</a></div></article>
+          <article class="certificate"><a href="assets/tryhackme-hacker-holidays.png" target="_blank"><img src="assets/tryhackme-hacker-holidays.png" alt="TryHackMe Hacker Holidays certificate" /></a><div class="certificate-body"><small>TRYHACKME</small><h3>Hacker Holidays — The Byte Lotus</h3><p>Issued 19 August 2026</p><a href="assets/tryhackme-hacker-holidays.png" target="_blank">View Certificate ↗</a></div></article>
+        </div>
+      </section>
+
+      <section class="shell" id="education">
+        <div class="section-head"><p class="eyebrow">Milestones</p><h2 style="margin-top:18px">Learning with <span class="serif">momentum.</span></h2></div>
+        <div class="milestones"><article class="milestone"><div class="icon">✦</div><b>Top 4%</b><span>of TryHackMe users</span></article><article class="milestone"><div class="icon">⌘</div><b>16 badges</b><span>earned through TryHackMe learning paths and challenges</span></article><article class="milestone"><div class="icon">↗</div><b>45+ hours</b><span>Cyber Security 101 Learning Path completed</span></article><article class="milestone"><div class="icon">◌</div><b>95%</b><span>in Saylor Academy's Introduction to Python course</span></article></div>
+        <div class="academic"><div class="section-head"><p class="eyebrow">Education</p><h2 style="margin-top:18px">Academic <span class="serif">path.</span></h2></div><div class="timeline"><article class="timeline-item"><time>AUG 2025 — PRESENT</time><h3>Lovely Professional University</h3><p>Phagwara, Punjab</p><strong>B.Tech. (Hons.) — CSE<br>Cyber Security &amp; Blockchain</strong><em>CGPA: 9.78</em></article><article class="timeline-item"><time>APR 2022 — MAR 2024</time><h3>Dhanbad Public School</h3><p>Dhanbad, Jharkhand</p><strong>Higher Secondary Education</strong><em>Percentage: 91.0%</em></article><article class="timeline-item"><time>APR 2021 — MAR 2022</time><h3>De Nobili School</h3><p>Dhanbad, Jharkhand</p><strong>Secondary Education</strong><em>Percentage: 80%</em></article></div></div>
+      </section>
+
+      <section class="contact shell" id="contact"><div><p class="eyebrow">Get in touch</p><h2 style="margin-top:18px">Let’s build <span class="serif">something</span> useful.</h2><p>Open to conversations around technology, secure systems, and opportunities to keep learning and building.</p></div><div class="contact-links"><a href="mailto:zishantoufique@gmail.com"><span class="contact-info"><i class="contact-icon"><svg class="line" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg></i><span><small>EMAIL</small>zishantoufique@gmail.com</span></span><b>↗</b></a><a href="tel:+919155250786"><span class="contact-info"><i class="contact-icon"><svg class="line" viewBox="0 0 24 24" aria-hidden="true"><path d="M4.5 3.8 7.1 3a2 2 0 0 1 2.3 1.1l1.2 2.8a2 2 0 0 1-.5 2.3L8.7 10.6a15 15 0 0 0 4.7 4.7l1.4-1.4a2 2 0 0 1 2.3-.5l2.8 1.2A2 2 0 0 1 21 17l-.8 2.6a2 2 0 0 1-2 1.4C10.5 20.6 3.4 13.5 3 5.8a2 2 0 0 1 1.5-2Z"/></svg></i><span><small>MOBILE</small>+91-9155250786</span></span><b>↗</b></a><a href="https://www.linkedin.com/in/zishantoufique/" target="_blank" rel="noreferrer"><span class="contact-info"><i class="contact-icon"><svg class="solid" viewBox="0 0 24 24" aria-hidden="true"><path d="M5.3 3.6A2.3 2.3 0 1 1 5.2 8a2.3 2.3 0 0 1 .1-4.4ZM3.3 9.8h4v10.6h-4V9.8Zm6.5 0h3.8v1.5h.1c.5-1 1.8-2.1 3.8-2.1 4.1 0 4.8 2.6 4.8 6.1v5.1h-4v-4.5c0-1.1 0-2.6-1.7-2.6s-2 1.2-2 2.5v4.6h-4V9.8Z"/></svg></i><span><small>LINKEDIN</small>Zishan Toufique</span></span><b>↗</b></a><a href="https://github.com/zishantoufique" target="_blank" rel="noreferrer"><span class="contact-info"><i class="contact-icon"><svg class="solid" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0a8 8 0 0 0-2.53 15.59c.4.08.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.13 0 0 .67-.21 2.2.82A7.65 7.65 0 0 1 8 4.86c.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.11.16 1.93.08 2.13.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8 8 0 0 0 8 0Z"/></svg></i><span><small>GITHUB</small>zishantoufique</span></span><b>↗</b></a><a href="https://tryhackme.com/p/zishantoufique" target="_blank" rel="noreferrer"><span class="contact-info"><i class="contact-icon"><svg class="line" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 19 6v5c0 4.5-3 8-7 10-4-2-7-5.5-7-10V6l7-3Z"/><path d="M9.5 12.5 11 14l3.5-4"/></svg></i><span><small>TRYHACKME</small>zishantoufique</span></span><b>↗</b></a></div></section>
+    </main>
+    <footer><div class="shell"><b class="brand">ZT.</b><span>Technology · Engineering · Learning</span><span>© 2026 Zishan Toufique</span></div></footer>
+  </body>
+</html>
